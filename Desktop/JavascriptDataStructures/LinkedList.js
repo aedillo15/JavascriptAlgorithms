@@ -51,6 +51,41 @@ LinkedList.prototype.search = function(searchValue){
   }
   return null;
 };
+// indexOf is a function that will take a value and return the indexes in which this value by an array.
+LinkedList.prototype.indexOf = function(value){
+  // IndexesArray an array that will hold the index numbers of given value
+  var indexesArray = [];
+  var currentIndex = 0;
+  var currentNode = this.head;
+  while(currentNode){
+    if(currentNode.value === value){
+      indexesArray.push(currentIndex);
+    }
+    /*If the currentNode value is equal to the value coming in push the currentIndex to the indexesArray then, increment currentIndex while currentNode is not null
+    */
+    currentNode = currentNode.next;
+    currentIndex++;
+  }
+  return indexesArray;
+};
+
+/* indexOf method testing 
+var myLL = new LinkedList();
+
+myLL.addToHead(30);
+myLL.addToHead(40);
+myLL.addToTail(100);
+myLL.addToTail(30);
+myLL.addToTail(60);
+myLL.addToTail(80);
+myLL.addToHead(40);
+
+*/
+
+console.log(myLL);
+console.log(myLL.indexOf(40));
+
+/* search(SearchValue) method testing 
 var myLL = new LinkedList();
 
 myLL.addToHead(123);
@@ -61,6 +96,8 @@ myLL.addToTail('world');
 myLL.addToTail(20);
 
 console.log(myLL.search(70));
+*/
+
 /* removeTail method testing
 var ll = new LinkedList();
 ll.addToHead('one');
@@ -69,6 +106,7 @@ ll.addToHead('three');
 
 console.log(ll.removeTail());
 */
+
 /* removeHead method testing 
 var ll = new LinkedList();
 
@@ -78,6 +116,7 @@ ll.addToTail(3000);
 ll.removeHead();
 console.log(ll.removeHead());
 */
+
 /* addToTail and addToHead testing 
 var myLL = new LinkedList();
 
@@ -99,6 +138,7 @@ ll.addToHead(300);
 
 console.log(ll);
 */
+
 /* Adding a node to head functionality */
 
 /* Node testing 
@@ -106,6 +146,7 @@ var node1 = new Node(100, 'node2', null);
 
 console.log(node1);
 */
+
 /* Var named LL assigned to object of new LinkedList() 
 var LL = new LinkedList();
 var userList = new LinkedList();
