@@ -38,7 +38,7 @@ BST.prototype.insert = function(value) {
     else this.right.insert(value);
   }
 };
-
+// Checks whether or not the value that is passed exists in the binary search tree.
 BST.prototype.contains = function(value){
   if(value === this.value) return true;
   else if(value < this.value){
@@ -49,6 +49,12 @@ BST.prototype.contains = function(value){
     if(!this.right) return false;
     else return this.right.contains(value);
   }
+};
+// It will touch all the nodes in the tree from least to greatest.
+BST.prototype.depthFirstTravesal = function(iteratorFunc){
+  if(this.left) this.left.depthFirstTravesal(iteratorFunc);
+  iteratorFunc(this.value);
+  if(this.right) this.right.depthFirstTravesal(iteratorFunc);
 };
 
 var bst = new BST(50);
@@ -72,3 +78,8 @@ console.log(bst.right.right); 100
 console.log(bst.contains(85)); true
 console.log(bst.contains(15)); false
 */
+bst.depthFirstTravesal(log);
+
+function log(value){
+  console.log(value);
+}
