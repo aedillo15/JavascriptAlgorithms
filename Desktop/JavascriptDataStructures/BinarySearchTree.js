@@ -51,10 +51,31 @@ BST.prototype.contains = function(value){
   }
 };
 // It will touch all the nodes in the tree from least to greatest.
-BST.prototype.depthFirstTravesal = function(iteratorFunc){
-  if(this.left) this.left.depthFirstTravesal(iteratorFunc);
-  iteratorFunc(this.value);
-  if(this.right) this.right.depthFirstTravesal(iteratorFunc);
+BST.prototype.depthFirstTravesal = function(iteratorFunc, order){
+  if(order === 'pre-order') iteratorFunc(this.value);
+  if(this.left) this.left.depthFirstTravesal(iteratorFunc, order);
+  if(order === 'in-order') iteratorFunc(this.value);
+  if(this.right) this.right.depthFirstTravesal(iteratorFunc, order);
+  if(order === 'post-order') iteratorFunc(this.value);
+};
+// breadthFirstTravesal method that iterates through the tree accordingly to hierarchy
+BST.prototype.breadthFirstTravesal = function(iteratorFunc){
+  var queue = [this];
+  while (queue.length){
+    var treeNode = queue.shift();
+    iteratorFunc(treeNode);
+    if(treeNode.left) queue.push(treeNode.left);
+    if (treeNode.right) queue.push(treeNode.right);
+  }
+};
+BST.prototype.getMinVal = function(){
+  if(this.left) return this.left.getMinVal();
+  else return this.value;
+};
+
+BST.prototype.getMaxVal = function() {
+  if (this.right) return this.right.getMaxVal();
+  else return this.value;
 };
 
 var bst = new BST(50);
@@ -71,6 +92,15 @@ bst.insert(35);
 bst.insert(85);
 bst.insert(105);
 bst.insert(10);
+
+console.log('MIN: ', bst.getMinVal());
+console.log('MAX: ', bst.getMaxVal());
+/*
+function log(node){
+  console.log(node.value);
+}
+*/
+
 /* Insert method search test 
 console.log(bst.right.right); 100
 */
@@ -78,8 +108,12 @@ console.log(bst.right.right); 100
 console.log(bst.contains(85)); true
 console.log(bst.contains(15)); false
 */
-bst.depthFirstTravesal(log);
-
+//bst.depthFirstTravesal(log, 'pre-order');
+//bst.depthFirstTravesal(log, 'in-order');
+//bst.depthFirstTravesal(log, 'post-order');
+//bst.breadthFirstTravesal(log);
+/* log function for depthFirstTravesal 
 function log(value){
   console.log(value);
 }
+*/
